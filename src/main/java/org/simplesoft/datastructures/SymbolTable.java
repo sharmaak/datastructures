@@ -2,33 +2,33 @@ package org.simplesoft.datastructures;
 
 /**
  *
- * @param <Key> Assume keys are Comparable
- * @param <Value>
+ * @param <K> Assume keys are Comparable
+ * @param <V>
  */
-public interface SymbolTable<Key, Value>
+public interface SymbolTable<K extends Comparable<K>, V>
 {
     /**
      * Put key value par into tthe table. Remove key from table f value == null
      */
-    public void put(Key key, Value val);
+    public void put(K key, V val);
 
     /**
-     * Fetch value paire with given key. Returns null if key is absent
+     * Fetch value pair with given key. Returns null if key is absent
      */
-    public Value get(Key key);
+    public V get(K key);
 
     /**
      * Remove key and associated value from table
      */
-    public void delete(Key key);
+    public void delete(K key);
 
     /**
      * Is there a value paired with they key
      */
-    public boolean contains(Key key);
+    public boolean contains(K key);
 
     /**
-     * is the tabel empty
+     * is the table empty
      */
     public boolean isEmpty();
 
@@ -40,7 +40,17 @@ public interface SymbolTable<Key, Value>
     /**
      * Fetch all keys in the table
      */
-    Iterable<Key> keys();
+    public Iterable<K> keys();
+
+    /**
+     * Find the largest key less than or equal to the given key
+     */
+    public K floor(K key);
+
+    /**
+     * Find the smallest key greater than or equal to the given key
+     */
+    public K ceiling(K key);
 
 
 }

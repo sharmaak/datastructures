@@ -1,9 +1,9 @@
 package org.simplesoft.datastructures.impl;
 
-import java.util.ArrayList;
+import org.simplesoft.datastructures.SymbolTable;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -11,15 +11,15 @@ import java.util.logging.Logger;
  * @param <K>
  * @param <V>
  */
-public class BinarySearchTree<K extends Comparable<K>, V> {
+    public class BinarySearchTree<K extends Comparable<K>, V> {
 
     private static final Logger logger = Logger.getLogger(BinarySearchTree.class.getName());
-    public class Node {
-        private K key;          // the key for the data
-        private V value;        // the data
-        private Node right;     // left child
-        private Node left;      // right child
-        private int nodeCount;  // number of nodes in subtree
+    protected class Node {
+        protected K key;          // the key for the data
+        protected V value;        // the data
+        protected Node right;     // left child
+        protected Node left;      // right child
+        protected int nodeCount;  // number of nodes in subtree
 
         Node(K key, V value, int nodeCount) {
             this.key = key;
@@ -28,7 +28,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         }
     }
 
-    private Node root;
+    protected Node root;
 
     public BinarySearchTree() {
     }
@@ -51,8 +51,20 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         return size(root);
     }
 
+    public Iterable<K> keys() {
+        return null;  //todo
+    }
+
     public void delete(K key) {
         // TODO: implementation
+    }
+
+    public boolean contains(K key) {
+        return get(key) != null;
+    }
+
+    public boolean isEmpty() {
+        return root==null;
     }
 
     /**********************************************************
@@ -111,21 +123,23 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         list.add(current.key);
         inOrder(current.right, list);
     }
+
     public void preOrder(Node current, List<K> list){
         if (current == null) return;
 
         // current-left-right
-        inOrder(current.left, list);
         list.add(current.key);
-        inOrder(current.right, list);
+        preOrder(current.left, list);
+        preOrder(current.right, list);
     }
+
     public void postOrder(Node current, List<K> list){
         if (current == null) return;
 
-        // current-left-right
-        inOrder(current.left, list);
+        // left-right-current
+        postOrder(current.left, list);
+        postOrder(current.right, list);
         list.add(current.key);
-        inOrder(current.right, list);
     }
 
 

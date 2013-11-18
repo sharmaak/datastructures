@@ -1,4 +1,4 @@
-package org.simplesoft.datastructures;
+package org.simplesoft.datastructures.impl;
 
 import org.simplesoft.datastructures.impl.BinarySearchTree;
 import org.testng.annotations.Test;
